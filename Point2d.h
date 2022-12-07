@@ -10,6 +10,7 @@ public:
 
 	Point2d();
 	Point2d(double in_x, double in_y);
+	~Point2d();
 };
 
 
