@@ -89,6 +89,32 @@ void Board::placePiece(Board &b, Point2d move){
     return;
 }
 
+void Board::placePiece(Board & b, Point2d move){
+    if (b.moveCount % 2 == 1){
+        b.boardptr[Point2d.x][Point2d.y] = 1;
+    }
+    else {
+        b.boardptr[Point2d.x][Point2d.y] = 2;
+    }
+    return;
+}
+
+int Board::AIMove(Board & b){
+    srand(time(NULL));
+    for (int r = 0; r < 7; r++){
+        for (int r = 0; r < 6; r++){
+            if (b.boardptr[r][c]== 0){
+                b.boardptr[r][c] = 2;
+                winCheck(Board & b);
+                if (b.game_over != 0){
+                    return c;
+                }
+            }
+        }
+    }
+    int rand_move = rand() % 7;
+    return rand_move;
+}
 
 
 
