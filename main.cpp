@@ -22,12 +22,6 @@ int main()
 	// int Player1Drop;
 	// int Player2Drop;
 
-	/* Keeps track of the score if prompted to continue */
-	int AIScore = 0;
-	int P1Score = 0;
-	int P2Score = 0;
-	int Draw = 0;
-
 	/* Used do-while loop until player decides to quit the game */
 
 	do {
@@ -41,12 +35,18 @@ int main()
 		//1P VS. 2P
 		//EXIT
 
+		/* Keeps track of the score if prompted to continue */
+		/* When returning to to the title screen, the score resets */
+		int AIScore = 0;
+		int P1Score = 0;
+		int P2Score = 0;
+		int Draw = 0;
+
 		/* If 1P VS. CPU was selected (This is a while loop) */
 		//Player 1 needs to input name
 		cout << "Player 1, please enter your name: " << endl;
 		cin >> //Player1.
 		do {
-			//Whoever goes first will be randomized
 			//Pieces are given to the player depending on if they're 1st or 2nd
 			//Board is on display
 
@@ -54,7 +54,7 @@ int main()
 			cout << "AI Wins" << AIScore << endl; //Keeps track of AI Wins
 			cout << "Draw(s)" << Draw << endl; //Keeps track of draws
 
-			while(//The game is not over)
+			while(//The conditions game over conditions are not met)
 			{
 				cout << "Player 1's turn: ";
 				cin >> Player1Drop;
@@ -72,6 +72,46 @@ int main()
 
 			/* if CPU wins */
 			//AIScore++
+
+			cout << "Would you like to play again?" << endl;
+
+
+		} while(Again != 'n' || Again != 'N');
+
+
+		/* If 1P VS. 2P was selected (This is a while loop) */
+		//Player 1 needs to input name
+		cout << "Player 1, please enter your name: " << endl;
+		cin >> //Player1.
+		cout << "Player 2, please enter your name: " << endl;
+		cin >> //Player2.
+		do {
+			//Pieces are given to the player depending on if they're 1st or 2nd
+			//Board is on display
+
+			cout << "P1 Wins" << P1Score << endl; //Keeps track of player wins
+			cout << "AI Wins" << AIScore << endl; //Keeps track of AI Wins
+			cout << "Draw(s)" << Draw << endl; //Keeps track of draws
+
+			while(//The conditions game over conditions are not met)
+			{
+				cout << "Player 1's turn: ";
+				cin >> Player1Drop;
+
+				cout << "Player 2's turn: ";
+				cin >> Player2Drop
+			}
+
+			/* Winner will be decided if 4-in-a-row was -,|,/,\ */
+
+			/* if Draw */
+			//Draw++
+
+			/* if Player 1 wins */
+			//P1Score++
+
+			/* if Player 2 wins */
+			//P2Score++
 
 			cout << "Would you like to play again?" << endl;
 
