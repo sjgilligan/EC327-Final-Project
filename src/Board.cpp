@@ -11,80 +11,89 @@ using namespace std;
 
 Board::Board(){
     game_over = 0;
-    for (int r = 0; r < 8; r++){
-        for (int c = 0; c < 8; c++){
-            boardptr[r][c] = 0;
+    for (int r = 0; r < 6; r++){
+        for (int c = 0; c < 7; c++){
+            this->boardptr[r][c] = 0;
         }
     }
 }
 
-void Board::winCheck(Board &b){
-    
-    for (int r = 0; r < 8; r++){
+int Board::winCheck(){
+    for (int r = 0; r < 6; r++){
         for (int c = 0; c < 5; c++){
-            if (b.boardptr[r][c] == 1 && b.boardptr[r][c+1] == 1 && b.boardptr[r][c+2] == 1 && b.boardptr[r][c+3] == 1){
-                b.game_over = 1;
+            if (this->boardptr[r][c] == 1 && this->boardptr[r][c+1] == 1 && this->boardptr[r][c+2] == 1 && this->boardptr[r][c+3] == 1){
+                this->game_over = 1;
             }
-            if (b.boardptr[r][c] == 2 && b.boardptr[r][c+1] == 2 && b.boardptr[r][c+2] == 2 && b.boardptr[r][c+3] == 2){
-                b.game_over = 2;
-            }
-        }
-    }
-    
-    for (int r = 0; r < 5; r++){
-        for (int c = 0; c < 8; c++){
-            if (b.boardptr[r][c] == 1 && b.boardptr[r+1][c] == 1 && b.boardptr[r+2][c] == 1 && b.boardptr[r+3][c] == 1){
-                b.game_over = 1;
-            }
-            if (b.boardptr[r][c] == 2 && b.boardptr[r+1][c] == 2 && b.boardptr[r+2][c] == 2 && b.boardptr[r+3][c] == 2){
-                b.game_over = 2;
+            if (this->boardptr[r][c] == 2 && this->boardptr[r][c+1] == 2 && this->boardptr[r][c+2] == 2 && this->boardptr[r][c+3] == 2){
+                this->game_over = 2;
             }
         }
     }
     
-    for (int r=3; r < 8; r++){
+    for (int r = 0; r < 6; r++){
+        for (int c = 0; c < 5; c++){
+            if (this->boardptr[r][c] == 1 && this->boardptr[r+1][c] == 1 && this->boardptr[r+2][c] == 1 && this->boardptr[r+3][c] == 1){
+                this->game_over = 1;
+            }
+            if (this->boardptr[r][c] == 2 && this->boardptr[r+1][c] == 2 && this->boardptr[r+2][c] == 2 && this->boardptr[r+3][c] == 2){
+                this->game_over = 2;
+            }
+        }
+    }
+    
+    for (int r=3; r < 6; r++){
         for (int c=0; c < 5; c++){
-            if (b.boardptr[r][c] == 1 && b.boardptr[r-1][c+1] == 1 && b.boardptr[r-2][c+2] == 1 && b.boardptr[r-3][c+3] == 1){
-                b.game_over = 1;
+            if (this->boardptr[r][c] == 1 && this->boardptr[r-1][c+1] == 1 && this->boardptr[r-2][c+2] == 1 && this->boardptr[r-3][c+3] == 1){
+                this->game_over = 1;
             }
-            if (b.boardptr[r][c] == 2 && b.boardptr[r-1][c+1] == 2 && b.boardptr[r-2][c+2] == 2 && b.boardptr[r-3][c+3] == 2){
-                b.game_over = 2;
+            if (this->boardptr[r][c] == 2 && this->boardptr[r-1][c+1] == 2 && this->boardptr[r-2][c+2] == 2 && this->boardptr[r-3][c+3] == 2){
+                this->game_over = 2;
             }
         }
     }
     
-    for (int r=0; r < 5; r++){
+    for (int r=0; r < 6; r++){
         for (int c=0; c < 5; c++){
-            if (b.boardptr[r][c] == 1 && b.boardptr[r+1][c+1] == 1 && b.boardptr[r+2][c+2] == 1 && b.boardptr[r+3][c+3] == 1){
-                b.game_over = 1;
+            if (this->boardptr[r][c] == 1 && this->boardptr[r+1][c+1] == 1 && this->boardptr[r+2][c+2] == 1 && this->boardptr[r+3][c+3] == 1){
+                this->game_over = 1;
             }
-            if (b.boardptr[r][c] == 2 && b.boardptr[r+1][c+1] == 2 && b.boardptr[r+2][c+2] == 2 && b.boardptr[r+3][c+3] == 2){
-                b.game_over = 2;
+            if (this->boardptr[r][c] == 2 && this->boardptr[r+1][c+1] == 2 && this->boardptr[r+2][c+2] == 2 && this->boardptr[r+3][c+3] == 2){
+                this->game_over = 2;
             }
         }
     }
     
-    if (b.moveCount == 42){
-        b.game_over = 3;
+    if (this->moveCount == 42){
+        this->game_over = 3;
     }
-    return;
+    return game_over;
 }
 
-Point2d Board::getMove(Board & b, int move){
-    for (int r = 0; r < 8; r++){
-        if (b.boardptr[r][move] == 0){
-            return Point2d(r,move);
+Point2d Board::getMove(int move){
+    for(int r = 0; r < 6; r++){
+        if(this->boardptr[move][r] == 0) {
+            return Point2d(move + 1, r-6);
         }
     }
     return Point2d(10,10);
 }
 
-void Board::placePiece(Board & b, Point2d move){
-    if (b.moveCount % 2 == 1){
-        b.boardptr[Point2d.x][Point2d.y] = 1;
+void Board::placePiece(int move,char symbol){
+    if (symbol == 'X'){
+        for(int r = 0; r < 6 ; r++){
+            if(this->boardptr[move][r] == 0){
+                this->boardptr[move][r] = 1;
+                return;
+            }
+        }
     }
     else {
-        b.boardptr[Point2d.x][Point2d.y] = 2;
+        for(int r = 0; r < 6 ; r++){
+            if(this->boardptr[move][r] == 0){
+                this->boardptr[move][r] = 2;
+                return;
+            }
+        }
     }
     return;
 }

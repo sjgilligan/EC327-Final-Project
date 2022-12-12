@@ -30,12 +30,12 @@ void Visual::Startup() {
 }
 
 void Visual::Plot(Point2d p, char piece) {
-    grid[p.x][p.y] = piece;
+    grid[p.x - 1][p.y] = piece;
 }
 
 void Visual::Draw(){
     for(int j = rows - 1; j > 0; j--){
-        for(int i = 1; i <= columns; i++){
+        for(int i = 0; i <= columns; i++){
             if(grid[i][j] == ' '){
                 cout << "| ";
             }else {

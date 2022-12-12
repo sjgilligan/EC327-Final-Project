@@ -12,18 +12,18 @@
 #include <cstdlib>
 #include <cmath>
 #include <time.h>
-#include "Point2d"
+#include "Point2d.h"
 
 class Board{
 public:
-    const static int boardptr[5][6];
+    int boardptr[6][7];
     int game_over;
     int moveCount;
     
     Board();
-    void winCheck(Board &b);
-    Point2d getMove(Board &b, int move);
-    void placePiece(Board &b, Point2d move);
+    int winCheck();
+    Point2d getMove(int move);
+    void placePiece(int move,char symbol);
 };
 
 #endif /* Board_h */
