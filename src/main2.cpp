@@ -14,8 +14,8 @@ using namespace std;
 int main(){
     Visual V;
     Board B;
+    B.getStatus();
     int move;
-    int answer_check;
     int Select; //Choice to face the CPU, PlayerTwo, or Quitting the program
 
     do {
@@ -23,7 +23,6 @@ int main(){
         B = Board();
         V.Startup();
         move = 0;
-        answer_check = 4;
 
         cout << "Select your choice (1-3)" << endl;
         cout << "1: 1P VS. CPU" << endl;
@@ -75,44 +74,52 @@ int main(){
             Player1.Charask(1);
             Player Player2;
             Player2.Nameask(2);
-            Player2.GivePiece(Player1.GetChar());
+            Player2.Charask(2);
 
             V.Draw();
             do {
                 cout << Player1.GetName() << ", ";
+                while (B.getStatus()==Full){
                 move = Player1.MakeMove();
                 B.placePiece(move, Player1.GetChar());
+                }
                 V.Plot(B.getMove(move), Player1.GetChar());
                 V.Draw();
-                if(B.winCheck() == 1){
+                int win=B.winCheck();
+                if(win == 1){
                     cout << Player1.GetName() << " wins!" << endl;
                     break;
                 }
-                if(B.winCheck() == 2){
-                    cout << Player2.GetName() << " wins!" << endl;
+                if(win == 2){
+                    cout << Player1.GetName() << " wins!" << endl;
                     break;
                 }
-                if(B.winCheck() == 3){
+                else if(win == 3){
                     cout << Player1.GetName() << " and " << Player2.GetName() << " TIE!" << endl;
                     break;
                 }
+                B.moveup();
                 cout << Player2.GetName() << ", ";
+                while (B.getStatus()==Full){
                 move = Player2.MakeMove();
                 B.placePiece(move, Player2.GetChar());
+                }
                 V.Plot(B.getMove(move), Player2.GetChar());
                 V.Draw();
-                if(B.winCheck() == 1){
-                    cout << Player1.GetName() << " wins!" << endl;
-                    break;
-                }
-                if(B.winCheck() == 2){
+                win = B.winCheck();
+                if(win == 1){
                     cout << Player2.GetName() << " wins!" << endl;
                     break;
                 }
-                if(B.winCheck() == 3){
+                if(win == 2){
+                    cout << Player2.GetName() << " wins!" << endl;
+                    break;
+                }
+                else if(win == 3){
                     cout << Player1.GetName() << " and " << Player2.GetName() << " TIE!" << endl;
                     break;
                 }
+                B.moveup();
             } while (B.winCheck() == 0);
         }
 

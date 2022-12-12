@@ -9,15 +9,15 @@
 
 using namespace std;
 
-Visual::Visual() {
-    for(int j = rows - 1; j > 0; j--){
+Visual::Visual() { //makes board
+    for(int j = rows; j >= 0; j--){
         for(int i = 0; i <= columns; i++){
             grid[i][j] = ' ';
         }
     }
 }
 
-void Visual::Startup() {
+void Visual::Startup() { //fancy :)
     cout << "Welcome to..." << endl;
     cout << "        {}       {}{}      {}{}   {}   {}{}   {}   {}{}{}       {}   {}{}{}{}{}       {}    {}" << endl;
     cout << "      {}       {}    {}    {} {}  {}   {} {}  {}   {}         {}         {}           {}    {}" << endl;
@@ -30,12 +30,12 @@ void Visual::Startup() {
 }
 
 void Visual::Plot(Point2d p, char piece) {
-    grid[p.x - 1][p.y] = piece;
+    grid[p.x ][p.y] = piece;
 }
 
 void Visual::Draw(){
-    for(int j = rows - 1; j > 0; j--){
-        for(int i = 0; i <= columns; i++){
+    for(int j = rows-1; j > 0; j--){
+        for(int i = 0; i <= columns-1; i++){
             if(grid[i][j] == ' '){
                 cout << "| ";
             }else {

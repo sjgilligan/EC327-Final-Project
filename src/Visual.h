@@ -9,11 +9,11 @@
 #include "Point2d.h"
 
 const int rows = 7;
-const int columns = 6;
+const int columns = 7;
 
 class Visual {
 private:
-    char grid[rows][columns];
+    char grid[rows][columns-1];
 public:
     Visual();
     void Startup();

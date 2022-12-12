@@ -17,11 +17,11 @@ Player::Player(){
 
 void Player::GiveName() {
     name = "CPU";
+    srand(time(NULL));
 }
 
-int Player::AIMove(Board* b){
+int Player::AIMove(Board* b){ //random cpu movement
     cout << "CPU thinking very hard..." << endl;
-    srand(time(NULL));
     /*for (int c = 0; c < 6; c++){
         for (int r = 0; r < 7; r++){
             if (b->boardptr[c][r]== 0){
@@ -32,13 +32,16 @@ int Player::AIMove(Board* b){
                 }
             }
         }
-    }*/
-    int rand_move = (rand() % 7) + 1;
+    }*/ //old cpu movement
+    int rand_move = rand() % 7 + 1;
+    if (b->boardptr[rand_move][5]){//if the CPU manages to find a full column, go again till an empty column is called
+        rand_move = rand() % 7 + 1;
+    }
     return rand_move;
 }
 
 void Player::GivePiece(char in_char) {
-    if(in_char = 'X'){
+    if(in_char == 'X'){
         symbol = 'O';
     }else{
         symbol = 'X';
@@ -74,12 +77,11 @@ int Player::MakeMove(){
     int column;
     cout<<"Which column would you like to select? ";
     cin >>column;
-    if (column <1 || column >7){
+    if (column <1 || column >7){//if the player wants to pick column 2758309, not going to work
         cout<< "Invalid command. Please select between 1 to 7";
         cin>>column;
-    }
+}
     return column;
-
 }
 Player::~Player(){
 
